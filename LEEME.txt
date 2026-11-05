@@ -1,0 +1,30 @@
+LITERATURA QUIZ — ACCESO ESTUDIANTE / PROFESOR
+
+CONTENIDO
+- index.html: aplicación web.
+- GoogleAppsScript.gs: servidor para guardar resultados y trivias en Google Sheets.
+
+IMPORTANTE: para que los resultados de celulares distintos lleguen a Marcia, hay que configurar el servidor. No basta con abrir el HTML localmente.
+
+CONFIGURACIÓN DEL SERVIDOR (una sola vez)
+1. Entra a https://sheets.google.com y crea una hoja de cálculo nueva para Literatura Quiz.
+2. En esa hoja, abre Extensiones > Apps Script.
+3. Borra el código de ejemplo y pega todo el contenido de GoogleAppsScript.gs. Guarda el proyecto.
+4. En Apps Script, pulsa Implementar > Nueva implementación. Elige Aplicación web.
+5. Ejecutar como: Yo. Quién tiene acceso: Cualquier persona. Implementa y autoriza los permisos solicitados.
+6. Copia la URL que termina en /exec.
+7. En index.html busca la línea const API_URL = 'PEGA_AQUI_LA_URL_DE_TU_APLICACION_WEB_DE_GOOGLE_APPS_SCRIPT'; y reemplaza el texto entre comillas por la URL copiada.
+8. Publica de nuevo la carpeta en GitHub Pages.
+
+ACCESO DOCENTE
+Usuario: Marcia
+Contraseña: la contraseña indicada por la profesora. Está guardada en el archivo Apps Script del servidor, no en el HTML público.
+
+FUNCIONES
+- Estudiante: nombre completo + grado, luego selecciona movimiento y juega.
+- Profesor: consulta nombre, grado, movimiento, puntaje, porcentaje y fecha.
+- Editor: crea trivias agregando título, periodo, descripción y exactamente 15 preguntas con cuatro opciones.
+- Las trivias creadas se guardan en la hoja y aparecen a estudiantes después de actualizar/publicar y entrar a la app.
+
+SEGURIDAD Y PRIVACIDAD
+El acceso docente se valida en Apps Script. Sin configurar y desplegar el servidor, no se pueden enviar resultados entre dispositivos. Comparte el enlace solo con tu clase. Los datos de estudiantes se almacenan en la hoja de cálculo de la cuenta que despliegue el servidor.
