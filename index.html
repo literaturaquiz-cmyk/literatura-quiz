@@ -43,7 +43,23 @@ async function api(action, payload={}) {
   if (!apiReady()) throw new Error('Falta configurar la conexión de Google Sheets. Sigue el archivo LEEME.');
   const res = await fetch(API_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({action,...payload})});
   const data = await res.json(); if (!data.ok) throw new Error(data.error || 'No se pudo completar la operación.'); return data;
+  const TEACHER_USER='Marcia', TEACHER_PASS='1221';
+async function teacherLogin(){
+ const u=$('teacherUser').value.trim(), p=$('teacherPass').value;
+ if(u.toLowerCase()!==TEACHER_USER.toLowerCase()||p!==TEACHER_PASS){
+  $('teacherError').textContent='Usuario o contraseña incorrectos.';return;
+ }
+ teacherSession=true;
+ $('teacherError').textContent='';
+ $('teacherPass').value='';
+ $('teacherResults').innerHTML='<p class="muted">Cargando resultados…</p>';
+ show('teacherPanel');
+ await loadTeacherPanel();
 }
+$('teacherEnter').onclick=teacherLogin;
+$('teacherUser').addEventListener('keydown',e=>{if(e.key==='Enter')teacherLogin()});
+$('teacherPass').addEventListener('keydown',e=>{if(e.key==='Enter')teacherLogin()});
+} 
 $('studentRole').onclick=()=>show('studentLogin'); $('teacherRole').onclick=()=>show('teacherLogin');
 $('backRolesStudent').onclick=()=>show('roles'); $('backRolesTeacher').onclick=()=>show('roles');
 $('studentEnter').onclick=async()=>{
